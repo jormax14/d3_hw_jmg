@@ -11,8 +11,8 @@ function makeResponsive() {
 
     var margin = {
         top: 50,
-        right: 25,
-        bottom: 50,
+        right: 50,
+        bottom: 75,
         left: 50
     };
 
@@ -34,7 +34,6 @@ function makeResponsive() {
             healthData.forEach(function(data) {
                 data.poverty = parseFloat(data.poverty)/100;
                 data.healthcare = parseFloat(data.healthcare)/100;
-                // data.abbr = data.abbr;
             });
 
             var xLinearScale = d3.scaleLinear()
@@ -79,13 +78,21 @@ function makeResponsive() {
                 .style('font-weight', 'bold')
                 .style('text-anchor', 'middle');
             
-
+            chartGroup.append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', 0 - margin.left)
+                .attr('x', 0 - (height/2))
+                .attr('dy', '1em')
+                .classed('axis-text', true)
+                .text('lacks healthcare')
+                .style('font-weight', 'bold')
             
-
-
+            chartGroup.append('text')
+                .attr('transform', `translate(${width/2}, ${height + margin.top})`)
+                .attr('text-anchor', 'middle')
+                .text('in poverty')
+                .style('font-weight', 'bold')        
         });
-
-
 }
 
 makeResponsive();
